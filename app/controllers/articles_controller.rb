@@ -5,7 +5,16 @@ class ArticlesController < ApplicationController
     end
 
     def show
-        @articles = Article.find(params[:id]) 
+        
+        if Article.exists?(params[:id])
+            puts "this article exists"
+            @articles = Article.find(params[:id])
+        else
+            flash.notice = "That article does not exist"
+
+            redirect_to articles_path(@articles)
+        end
+            
     end
 
     def new
