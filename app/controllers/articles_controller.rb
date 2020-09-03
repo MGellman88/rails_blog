@@ -6,9 +6,9 @@ class ArticlesController < ApplicationController
 
     def show
         
-        if Article.exists?(params[:id])
+        if Article.exists?(params[:id]) # this was originally only passing an integer as an argument, rather than the actual ID params we want, so I updated to pass params
             puts "this article exists"
-            @articles = Article.find(params[:id])
+            @articles = Article.find(params[:id])   #this was originally outside of the conditional, so the app was looking for the article before actually check if it existed or not
         else
             flash.notice = "That article does not exist"
 
